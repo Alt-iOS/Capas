@@ -1,6 +1,12 @@
 package com.mayab.desarrollo.entities;
 
 public class UserPOJO {
+    public UserPOJO(String name, String pswrd, String email) {
+        this.email = email;
+        this.pswrd = pswrd;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

@@ -1,8 +1,7 @@
 package com.mayab.desarrollo.persistance;
 import com.mayab.desarrollo.entities.UserPOJO;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.List;
 
 public class UserDAO implements IUserDAO{
@@ -15,8 +14,29 @@ public class UserDAO implements IUserDAO{
             throw new RuntimeException(e);
         }
     }
-    public int createUser(UserPOJO User) {
-        return 0;
+    public int createUser(UserPOJO user) {
+        String query = "INSERT INTO users(name,password, email) VALUES(?,?,?)";
+        Connection con = null;
+        PreparedStatement ps=null;
+        int result =-1;
+        try {
+            con=getConnection();
+            ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getPswrd());
+            ps.setString(3, user.getEmail());
+            int id =ps.executeUpdate(); //Cuantas fueron afectadas por el update
+            System.out.println(id);
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()){
+                user.setId(rs.getInt(1));
+            }
+            result= user.getId();
+        } catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 
     public List<UserPOJO> findAll() {
@@ -29,5 +49,10 @@ public class UserDAO implements IUserDAO{
 
     public boolean deleteUser(int id) {
         return false;
+    }
+
+    @Override
+    public UserPOJO update(UserPOJO user, String password) {
+        return null;
     }
 }

@@ -8,5 +8,6 @@ public interface IUserDAO {
     public List<UserPOJO> findAll();
     public UserPOJO findById(UserPOJO user);
     public boolean deleteUser(int id);
+    public UserPOJO update(UserPOJO user, String password);
 
 }
