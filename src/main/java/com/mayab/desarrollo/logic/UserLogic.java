@@ -42,6 +42,10 @@ public class UserLogic {
         dao.update(u,"1234");
         */
         //test for delete user
+        /*
+        System.out.println("Test for delete user");
         dao.deleteUser(11);
+        */
+
     }
 }
