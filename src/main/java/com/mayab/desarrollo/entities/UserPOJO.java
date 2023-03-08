@@ -7,6 +7,10 @@ public class UserPOJO {
         this.name = name;
     }
 
+    public UserPOJO() {
+
+    }
+
     public int getId() {
         return id;
     }
